@@ -1,6 +1,6 @@
-package com.github.nscala_time.time
+package com.github.nscala_java_time.time
 
-import com.github.nscala_time.time.Imports.{richDuration, richSDuration}
+import com.github.nscala_java_time.time.Imports.{richDuration, richSDuration}
 import org.joda.time.Duration
 import org.scalacheck.{Prop, Arbitrary, Properties}
 import scala.concurrent.duration.{Duration => SDuration}

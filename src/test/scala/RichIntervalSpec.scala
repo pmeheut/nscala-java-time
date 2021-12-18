@@ -1,4 +1,4 @@
-package com.github.nscala_time.time
+package com.github.nscala_java_time.time
 
 import org.scalacheck._
 import org.scalacheck.Prop._

@@ -1,6 +1,6 @@
-package com.github.nscala_time.time
+package com.github.nscala_java_time.time
 
-import com.github.nscala_time.time.Imports._
+import com.github.nscala_java_time.time.Imports._
 import org.scalacheck.{Prop, Properties}
 
 object OrderingSpec extends Properties("Ordering"){

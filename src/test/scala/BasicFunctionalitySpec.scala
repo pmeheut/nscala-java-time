@@ -1,8 +1,8 @@
-package com.github.nscala_time.time
+package com.github.nscala_java_time.time
 
 import org.scalacheck.{Prop, Properties}
 import org.joda.time.DateTime
-import com.github.nscala_time.time.Imports._
+import com.github.nscala_java_time.time.Imports._
 
 object BasicFunctionalitySpec extends Properties("DateTime"){
 
