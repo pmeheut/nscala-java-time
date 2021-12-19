@@ -6,7 +6,7 @@ val Scala213 = "2.13.7"
 val unusedWarnings = "-Ywarn-unused" :: Nil
 
 console / initialCommands += {
-  Iterator("java.time._", "com.github.nscala_time.time.Imports._").map("import " +).mkString("\n")
+  Iterator("java.time._", "com.github.nscala_java_time.time.Implicits._").map("import " +).mkString("\n")
 }
 
 def gitHashOrBranch: String = scala.util.Try(

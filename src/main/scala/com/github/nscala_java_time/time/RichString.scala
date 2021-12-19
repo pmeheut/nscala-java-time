@@ -18,7 +18,7 @@ package com.github.nscala_java_time.time
 
 import java.time._
 import java.time.format.DateTimeFormatter
-
+import scala.util.Try
 
 class RichString(val s: String) extends AnyVal {
   def toLocalDateTime                        = LocalDateTime.parse(s)
@@ -28,11 +28,7 @@ class RichString(val s: String) extends AnyVal {
   def toDateTime(format: String)        = dateTimeFormat(format)
   def toDateTimeOption(format: String)  = toOption(toDateTime(format))
 
-  private def toOption[A](f: => A): Option[A] = try {
-    Some(f)
-  } catch {
-    case _: IllegalArgumentException => None
-  }
+  private def toOption[A](f: => A): Option[A] = Try(f).toOption
 
   def dateTimeFormat(format: String)      = DateTimeFormatter.ofPattern(format).parse(s)
 }
