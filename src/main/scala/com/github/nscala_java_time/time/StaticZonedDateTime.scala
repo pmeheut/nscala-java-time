@@ -18,8 +18,6 @@
 package com.github.nscala_java_time.time
 
 import java.time._
-import com.github.nscala_java_time.time.Implicits._
-
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 object StaticZonedDateTime extends StaticZonedDateTime

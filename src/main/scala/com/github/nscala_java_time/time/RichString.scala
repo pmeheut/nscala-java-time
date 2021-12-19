@@ -17,13 +17,13 @@
 package com.github.nscala_java_time.time
 
 import java.time._
-import java.time.format.{DateTimeFormatter, DateTimeFormatterBuilder}
+import java.time.format.DateTimeFormatter
 
 
 class RichString(val s: String) extends AnyVal {
-  def toDateTime                        = LocalDateTime.parse(s)
+  def toLocalDateTime                        = LocalDateTime.parse(s)
   def toLocalDate                       = LocalDate.parse(s)
-  def toDateTimeOption                  = toOption(toDateTime)
+  def toLocalDateTimeOption                  = toOption(toLocalDateTime)
   def toLocalDateOption                 = toOption(toLocalDate)
   def toDateTime(format: String)        = dateTimeFormat(format)
   def toDateTimeOption(format: String)  = toOption(toDateTime(format))

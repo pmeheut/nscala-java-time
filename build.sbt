@@ -6,7 +6,7 @@ val Scala213 = "2.13.7"
 val unusedWarnings = "-Ywarn-unused" :: Nil
 
 console / initialCommands += {
-  Iterator("org.joda.time._", "com.github.nscala_time.time.Imports._").map("import " +).mkString("\n")
+  Iterator("java.time._", "com.github.nscala_time.time.Imports._").map("import " +).mkString("\n")
 }
 
 def gitHashOrBranch: String = scala.util.Try(
@@ -14,8 +14,17 @@ def gitHashOrBranch: String = scala.util.Try(
 ).getOrElse("master")
 
 
-lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform).in(file(".")).
-  settings(
+lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("."))
+  .jvmSettings(
+    libraryDependencies ++= Seq(
+      "org.scalacheck" %% "scalacheck" % "1.14.3" % "test" cross CrossVersion.for3Use2_13)
+  )
+  .settings(
+    libraryDependencies ++= Seq(
+      "io.github.cquiroz" %%% "scala-java-time" % "2.3.0"
+    ),
     organization := "com.github.nscala-java-time",
     sonatypeProfileName := "com.github.nscala-java-time",
     name := "nscala-java-time",
@@ -56,8 +65,6 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         )
       }
     },
-    libraryDependencies ++= Seq("io.github.cquiroz" %%% "scala-java-time" % "2.3.0",
-      "org.scalacheck" %% "scalacheck" % "1.14.3" % "test" cross CrossVersion.for3Use2_13),
     pomPostProcess := { node =>
       import scala.xml._
       import scala.xml.transform._
@@ -110,3 +117,4 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       }
     }
   )
+
