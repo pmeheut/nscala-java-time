@@ -20,7 +20,7 @@ package com.github.nscala_java_time.time
 import java.time._
 import com.github.nscala_java_time.PimpedType
 
-class RichLocalDateTime(val underlying: LocalDateTime) extends AnyVal with PimpedType[LocalDateTime] {
+class RichLocalDateTime(val underlying: LocalDateTime) extends AnyVal with Ordered[RichLocalDateTime] with PimpedType[LocalDateTime] {
 
   def -(duration: Duration): LocalDateTime = underlying.minus(duration)
 
@@ -53,4 +53,12 @@ class RichLocalDateTime(val underlying: LocalDateTime) extends AnyVal with Pimpe
   def withMonth(month: Int) = underlying.withMonth(month)
 
   def withYear(year: Int) = underlying.withYear(year)
+
+  override def compare(that: RichLocalDateTime): Int = underlying.compareTo(that.underlying)
+
+  def toInstant(zoneId: ZoneId = ZoneId.systemDefault()): java.time.Instant = underlying.atZone(zoneId).toInstant()
+
+  def toDate(zoneId: ZoneId = ZoneId.systemDefault()): java.util.Date = java.util.Date.from(toInstant(zoneId))
+
+  // toLocalDate is already defined by the underlying
 }

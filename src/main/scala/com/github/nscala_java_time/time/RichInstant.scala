@@ -20,7 +20,7 @@ package com.github.nscala_java_time.time
 import java.time._
 import com.github.nscala_java_time.PimpedType
 
-class RichInstant(val underlying: Instant) extends AnyVal with PimpedType[Instant] {
+class RichInstant(val underlying: Instant) extends AnyVal with Ordered[RichInstant] with PimpedType[Instant] {
   def -(duration: Long): Instant = underlying.minusMillis(duration)
 
   def -(duration: Duration): Instant = underlying.minus(duration)
@@ -28,4 +28,16 @@ class RichInstant(val underlying: Instant) extends AnyVal with PimpedType[Instan
   def +(duration: Long): Instant = underlying.plusMillis(duration)
 
   def +(duration: Duration): Instant = underlying.plus(duration)
+
+  def milli: Long = underlying.toEpochMilli
+
+  override def compare(that: RichInstant): Int = underlying.compareTo(that.underlying)
+
+  def toLocalDate(zoneId: ZoneId = ZoneId.systemDefault()): LocalDate =  toZonedDateTime(zoneId).toLocalDate()
+
+  def toLocalDateTime(zoneId: ZoneId = ZoneId.systemDefault()): LocalDateTime =  toZonedDateTime(zoneId).toLocalDateTime()
+
+  def toZonedDateTime(zoneId: ZoneId = ZoneId.systemDefault()): ZonedDateTime =  underlying.atZone(zoneId)
+
+  def toDate(): java.util.Date = java.util.Date.from(underlying)
 }

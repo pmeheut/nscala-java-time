@@ -19,6 +19,7 @@ package com.github.nscala_java_time.time
 
 import java.time._
 
+
 object StaticZoneId extends StaticZoneId
 
 trait StaticZoneId {

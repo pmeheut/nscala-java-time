@@ -22,7 +22,7 @@ import com.github.nscala_java_time.PimpedType
 
 import java.time.temporal.ChronoUnit
 
-class RichZonedDateTime(val underlying: ZonedDateTime) extends AnyVal with PimpedType[ZonedDateTime] {
+class RichZonedDateTime(val underlying: ZonedDateTime) extends AnyVal with Ordered[RichZonedDateTime] with PimpedType[ZonedDateTime] {
 
   def -(duration: Long): ZonedDateTime = underlying.minus(duration, ChronoUnit.MILLIS)
 
@@ -61,4 +61,10 @@ class RichZonedDateTime(val underlying: ZonedDateTime) extends AnyVal with Pimpe
   def withMonth(month: Int) = underlying.withMonth(month)
 
   def withYear(year: Int) = underlying.withYear(year)
+
+  override def compare(that: RichZonedDateTime): Int = underlying.compareTo(that.underlying)
+
+  def toDate(): java.util.Date = java.util.Date.from(underlying.toInstant())
+
+  // toLocalDate and toLocalDateTime are already defined by the underlying
 }

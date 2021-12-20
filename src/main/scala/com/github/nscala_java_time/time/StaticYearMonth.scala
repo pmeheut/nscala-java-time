@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter
 object StaticYearMonth extends StaticYearMonth
 
 trait StaticYearMonth {
+  def apply(year: Int, month: Int = 1) = MonthDay.of(year, month)
   def now() = YearMonth.now()
   def now(zone: ZoneId) = YearMonth.now(zone)
   def parse(str: String) = YearMonth.parse(str)

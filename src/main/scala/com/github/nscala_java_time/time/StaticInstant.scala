@@ -1,4 +1,4 @@
-/** Copyright 2021 Pascal Meheut Copyright 2009 Jorge Ortiz Copyright 2009 Barry Kaplan
+/** Copyright 2021 Pascal Meheut Copyright 2009 Jorge Ortiz
   *
   * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
   * in compliance with the License. You may obtain a copy of the License at
@@ -13,28 +13,32 @@
 package com.github.nscala_java_time.time
 
 import java.time._
-import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
-object StaticLocalTime extends StaticLocalTime
+object StaticInstant extends StaticInstant
 
-trait StaticLocalTime {
-  final val MIDNIGHT = LocalTime.MIDNIGHT
-  final val Midnight = LocalTime.MIDNIGHT
+trait StaticInstant {
+  def apply(milli: Long) = Instant.ofEpochMilli(milli)
+  def ofDate(date: java.util.Date): Instant = date.toInstant()
 
-  def apply(hour: Int = 0, minutes: Int = 0, seconds: Int = 0, nanoSeconds: Int = 0) = LocalTime.of(hour, minutes, seconds, nanoSeconds)
-  def ofSecondOfDay(seconds: Long) = LocalTime.ofSecondOfDay(seconds)
-
-  def now() = LocalTime.now()
-  def now(zone: ZoneId) = LocalTime.now(zone)
-  def parse(str: String) = LocalTime.parse(str)
-  def parse(str: String, formatter: DateTimeFormatter) = LocalTime.parse(str, formatter)
+  def now() = Instant.now()
+  def parse(str: String) = Instant.parse(str)
 
   def nextSecond() = now().plus(1, ChronoUnit.SECONDS)
   def nextMinute() = now().plus(1, ChronoUnit.MINUTES)
   def nextHour() = now().plus(1, ChronoUnit.HOURS)
+  def nextDay() = now().plus(1, ChronoUnit.DAYS)
+  def tomorrow() = now().plus(1, ChronoUnit.DAYS)
+  def nextWeek() = now().plus(1, ChronoUnit.WEEKS)
+  def nextMonth() = now().plus(1, ChronoUnit.MONTHS)
+  def nextYear() = now().plus(1, ChronoUnit.YEARS)
 
   def lastSecond() = now().minus(1, ChronoUnit.SECONDS)
   def lastMinute() = now().minus(1, ChronoUnit.MINUTES)
   def lastHour() = now().minus(1, ChronoUnit.HOURS)
+  def lastDay() = now().minus(1, ChronoUnit.DAYS)
+  def yesterday() = now().minus(1, ChronoUnit.DAYS)
+  def lastWeek() = now().minus(1, ChronoUnit.WEEKS)
+  def lastMonth() = now().minus(1, ChronoUnit.MONTHS)
+  def lastYear() = now().minus(1, ChronoUnit.YEARS)
 }

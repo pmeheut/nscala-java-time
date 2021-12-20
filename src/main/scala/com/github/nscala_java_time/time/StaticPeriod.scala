@@ -22,6 +22,7 @@ import java.time._
 object StaticPeriod extends StaticPeriod
 
 trait StaticPeriod {
+  // Build with RichInt and + operator in RichPeriod
   def parse(str: String) = Period.parse(str)
 
   def days(days: Int) = Period.ofDays(days)

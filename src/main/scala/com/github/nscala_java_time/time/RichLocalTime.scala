@@ -19,7 +19,7 @@ package com.github.nscala_java_time.time
 import java.time._
 import com.github.nscala_java_time.PimpedType
 
-class RichLocalTime(val underlying: LocalTime) extends AnyVal with PimpedType[LocalTime] {
+class RichLocalTime(val underlying: LocalTime) extends AnyVal with Ordered[RichLocalTime] with PimpedType[LocalTime] {
 
   def -(period: Period): LocalTime = underlying.minus(period)
 
@@ -34,4 +34,6 @@ class RichLocalTime(val underlying: LocalTime) extends AnyVal with PimpedType[Lo
   def withMinute(minute: Int) = underlying.withMinute(minute)
 
   def withHour(hour: Int) = underlying.withHour(hour)
+
+  override def compare(that: RichLocalTime): Int = underlying.compareTo(that.underlying)
 }

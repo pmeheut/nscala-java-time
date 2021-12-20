@@ -21,26 +21,16 @@ import java.time._
 import com.github.nscala_java_time.PimpedType
 
 class RichPeriod(val underlying: Period) extends AnyVal with PimpedType[Period] {
+  def of(dt: ZonedDateTime): ZonedDateTime = dt.plus(underlying)
 
   def days: Int = underlying.getDays
-
   def months: Int = underlying.getMonths
-
   def years: Int = underlying.getYears
-
   def unary_- : Period = underlying.negated
-
   def -(period: Period): Period = underlying.minus(period)
-
   def +(period: Period): Period = underlying.plus(period)
-
   def *(scalar: Int): Period = underlying.multipliedBy(scalar)
-
   def ago(): ZonedDateTime = StaticZonedDateTime.now().minus(underlying)
-
   def later(): ZonedDateTime = StaticZonedDateTime.now().plus(underlying)
-
-  def from(dt: ZonedDateTime): ZonedDateTime = dt.plus(underlying)
-
   def before(dt: ZonedDateTime): ZonedDateTime = dt.minus(underlying)
 }

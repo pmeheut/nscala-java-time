@@ -6,13 +6,28 @@ val Scala213 = "2.13.7"
 val unusedWarnings = "-Ywarn-unused" :: Nil
 
 console / initialCommands += {
-  Iterator("java.time._", "com.github.nscala_java_time.time.Implicits._").map("import " +).mkString("\n")
+  Iterator("java.time._", "com.github.nscala_java_time.time.Imports._").map("import " +).mkString("\n")
 }
 
 def gitHashOrBranch: String = scala.util.Try(
   sys.process.Process("git rev-parse HEAD").lineStream_!.head
 ).getOrElse("master")
 
+lazy val publishSettings = Seq(
+  publishMavenStyle := true,
+  credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+  versionScheme := Some("early-semver"),
+  publishConfiguration := publishConfiguration.value.withOverwrite(true),
+  publishTo := Some("repsy" at "https://repo.repsy.io/mvn/pmeheut/default"), //sonatypePublishToBundle.value,
+)
+
+lazy val root = project
+  .in(file("."))
+  .settings(
+    publishSettings,
+    publishArtifact := false
+  )
+  .aggregate(nscalaJavaTime.js, nscalaJavaTime.jvm)
 
 lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
@@ -28,8 +43,6 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
     organization := "com.github.nscala-java-time",
     sonatypeProfileName := "com.github.nscala-java-time",
     name := "nscala-java-time",
-    publishMavenStyle := true,
-    publishTo := sonatypePublishToBundle.value,
     scalaVersion := Scala213,
     // sbt "release cross"
     crossScalaVersions := Seq(Scala213, "3.1.0"),
@@ -65,6 +78,7 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
         )
       }
     },
+    publishSettings,
     pomPostProcess := { node =>
       import scala.xml._
       import scala.xml.transform._

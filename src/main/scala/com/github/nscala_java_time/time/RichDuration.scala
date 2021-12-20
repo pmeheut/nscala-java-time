@@ -22,7 +22,7 @@ import com.github.nscala_java_time.PimpedType
 
 import java.time.temporal.ChronoUnit
 
-class RichDuration(val underlying: Duration) extends AnyVal with PimpedType[Duration] {
+class RichDuration(val underlying: Duration) extends AnyVal with Ordered[RichDuration] with PimpedType[Duration] {
 
   def days: Long = underlying.toDays
 
@@ -47,4 +47,6 @@ class RichDuration(val underlying: Duration) extends AnyVal with PimpedType[Dura
   def /(divisor: Long): Duration = underlying.dividedBy(divisor)
 
   def *(multiplicand: Long): Duration = underlying.multipliedBy(multiplicand)
+
+  override def compare(that: RichDuration): Int = underlying.compareTo(that.underlying)
 }
