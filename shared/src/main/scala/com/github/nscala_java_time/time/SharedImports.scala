@@ -12,15 +12,9 @@
   */
 package com.github.nscala_java_time.time
 
-object Imports extends Imports
+trait SharedImports extends SharedTypeImports with SharedStaticForwarderImports with Implicits
 
-object TypeImports extends TypeImports
-
-object StaticForwarderImports extends StaticForwarderImports
-
-trait Imports extends TypeImports with StaticForwarderImports with Implicits
-
-trait TypeImports {
+trait SharedTypeImports {
   type Instant = java.time.Instant
   type ZonedDateTime = java.time.ZonedDateTime
   type DateTimeFormatter = java.time.format.DateTimeFormatter
@@ -34,16 +28,16 @@ trait TypeImports {
   type MonthDay = java.time.MonthDay
 }
 
-trait StaticForwarderImports {
-  val DateTime = com.github.nscala_java_time.time.StaticZonedDateTime
-  val DateTimeFormat = com.github.nscala_java_time.time.StaticDateTimeFormatter
-  val DateTimeZone = com.github.nscala_java_time.time.StaticZoneId
-  val Duration = com.github.nscala_java_time.time.StaticDuration
-  val Instant = com.github.nscala_java_time.time.StaticInstant
+trait SharedStaticForwarderImports {
   val LocalDate = com.github.nscala_java_time.time.StaticLocalDate
   val LocalDateTime = com.github.nscala_java_time.time.StaticLocalDateTime
+  val ZonedDateTime = com.github.nscala_java_time.time.StaticZonedDateTime
+  val Instant = com.github.nscala_java_time.time.StaticInstant
   val LocalTime = com.github.nscala_java_time.time.StaticLocalTime
-  val Period = com.github.nscala_java_time.time.StaticPeriod
   val YearMonth = com.github.nscala_java_time.time.StaticYearMonth
   val MonthDay = com.github.nscala_java_time.time.StaticMonthDay
+  val DateTimeFormatter = com.github.nscala_java_time.time.StaticDateTimeFormatter
+  val ZoneId = com.github.nscala_java_time.time.StaticZoneId
+  val Duration = com.github.nscala_java_time.time.StaticDuration
+  val Period = com.github.nscala_java_time.time.StaticPeriod
 }

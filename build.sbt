@@ -5,9 +5,6 @@ val isScala3 = Def.setting(
 val Scala213 = "2.13.7"
 val unusedWarnings = "-Ywarn-unused" :: Nil
 
-val scalaCheck = Def.setting("org.scalacheck" %% "scalacheck" % "1.15.4" % "test" cross CrossVersion.for3Use2_13)
-
-
 console / initialCommands += {
   Iterator("java.time._", "com.github.nscala_java_time.time.Imports._").map("import " +).mkString("\n")
 }
@@ -33,21 +30,15 @@ lazy val root = project
   .aggregate(nscalaJavaTime.js, nscalaJavaTime.jvm)
 
 lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
-  .crossType(CrossType.Pure)
   .in(file("."))
   .jvmSettings(
-    libraryDependencies ++= Seq(
-      scalaCheck.value
-    )
   )
   .jsSettings(
-    libraryDependencies ++= Seq(
-      scalaCheck.value
-    )
   )
   .settings(
     libraryDependencies ++= Seq(
-      "io.github.cquiroz" %%% "scala-java-time" % "2.3.0"
+      "io.github.cquiroz" %%% "scala-java-time" % "2.3.0",
+      "org.scalameta" %%% "munit" % "1.0.0-M1" % Test
     ),
     organization := "com.github.nscala-java-time",
     sonatypeProfileName := "com.github.nscala-java-time",
