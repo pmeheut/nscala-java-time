@@ -5,3 +5,4 @@ boot/
 src_managed/
 .idea/
 .idea_modules/
+.bsp
