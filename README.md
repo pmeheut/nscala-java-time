@@ -1,6 +1,6 @@
 # nscala-java-time
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nscala-time/nscala-time_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nscala-time/nscala-time_2.12)
-[![scaladoc](https://javadoc.io/badge2/com.github.nscala-time/nscala-time_3/javadoc.svg)](https://javadoc.io/doc/com.github.nscala-time/nscala-time_3)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.pmeheut/nscala-java-time_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.pmeheut/nscala-java-time_2.13)
+[![scaladoc](https://javadoc.io/badge2/io.github.pmeheut/nscala-java-time_2.13/javadoc.svg)](https://javadoc.io/doc/io.github.pmeheut/nscala-java-time_2.13)
 
 A Scala wrapper for [cquiroz/scala-java-time]. This project forked from [nscala-time](https://github.com/nscala-time/nscala-time/ "scala-time") 
 It was then adapted to support this Scala implementation of the Java 8 Time library instead of JodaTime hence supporting Scala.js. 
@@ -11,7 +11,7 @@ It was then adapted to support this Scala implementation of the Java 8 Time libr
 Add the following to your sbt build:
 
 ```scala
-libraryDependencies += "io.github.pmeheut" %% "root" % "0.1.0"
+libraryDependencies += "io.github.pmeheut" %%% "nscala-java-time" % "0.1.0"
 ```
 
 ## Release Note
@@ -65,9 +65,7 @@ Please see the Java 8 time API for full explanation of key concepts or http://cq
 
 ## Documents
 
-<!---
-[scaladoc (latest stable release)](https://javadoc.io/doc/com.github.nscala-time/nscala-time_3)
--->
+[scaladoc (latest stable release)](https://javadoc.io/doc/io.github.pmeheut/nscala-java-time_2.13)
 
 ## Motivation
 
