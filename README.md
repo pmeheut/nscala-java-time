@@ -11,7 +11,7 @@ It was then adapted to support this Scala implementation of the Java 8 Time libr
 Add the following to your sbt build:
 
 ```scala
-libraryDependencies += "com.github.nscala-java-time" %% "nscala-java-time" % "0.1.0"
+libraryDependencies += "io.github.pmeheut" %% "root" % "0.1.0"
 ```
 
 ## Release Note
