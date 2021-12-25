@@ -1,8 +1,6 @@
 # nscala-java-time
-<!---
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nscala-time/nscala-time_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nscala-time/nscala-time_2.12)
 [![scaladoc](https://javadoc.io/badge2/com.github.nscala-time/nscala-time_3/javadoc.svg)](https://javadoc.io/doc/com.github.nscala-time/nscala-time_3)
--->
 
 A Scala wrapper for [cquiroz/scala-java-time]. This project forked from [nscala-time](https://github.com/nscala-time/nscala-time/ "scala-time") 
 It was then adapted to support this Scala implementation of the Java 8 Time library instead of JodaTime hence supporting Scala.js. 

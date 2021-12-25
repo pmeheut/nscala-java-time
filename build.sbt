@@ -13,18 +13,18 @@ def gitHashOrBranch: String = scala.util.Try(
   sys.process.Process("git rev-parse HEAD").lineStream_!.head
 ).getOrElse("master")
 
-lazy val publishSettings = Seq(
-  publishMavenStyle := true,
-  credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
-  versionScheme := Some("early-semver"),
-  publishConfiguration := publishConfiguration.value.withOverwrite(true),
-  publishTo := Some("repsy" at "https://repo.repsy.io/mvn/pmeheut/default"), //sonatypePublishToBundle.value,
-)
+ThisBuild / sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
+ThisBuild / organization := "io.github.pmeheut"
+ThisBuild / sonatypeProfileName := "io.github.pmeheut"
+ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / publishConfiguration := publishConfiguration.value.withOverwrite(true)
+ThisBuild / publishTo := sonatypePublishToBundle.value
+publishMavenStyle := true
 
 lazy val root = project
   .in(file("."))
   .settings(
-    publishSettings,
     publishArtifact := false
   )
   .aggregate(nscalaJavaTime.js, nscalaJavaTime.jvm)
@@ -36,13 +36,11 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
   .jsSettings(
   )
   .settings(
+    name := "nscala-java-time",
     libraryDependencies ++= Seq(
       "io.github.cquiroz" %%% "scala-java-time" % "2.3.0",
       "org.scalameta" %%% "munit" % "1.0.0-M1" % Test
     ),
-    organization := "com.github.nscala-java-time",
-    sonatypeProfileName := "com.github.nscala-java-time",
-    name := "nscala-java-time",
     scalaVersion := Scala213,
     // sbt "release cross"
     crossScalaVersions := Seq(Scala213, "3.1.0"),
@@ -78,7 +76,6 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
         )
       }
     },
-    publishSettings,
     pomPostProcess := { node =>
       import scala.xml._
       import scala.xml.transform._
@@ -106,8 +103,8 @@ lazy val nscalaJavaTime = crossProject(JSPlatform, JVMPlatform)
         <developers>
           <developer>
             <id>kmizu</id>
-            <name>Kota Mizushima</name>
-            <url>https://github.com/kmizu</url>
+            <name>Pascal Meheut</name>
+            <url>https://github.com/pmeheut</url>
           </developer>
         </developers>
       ),
