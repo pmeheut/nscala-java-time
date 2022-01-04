@@ -19,13 +19,6 @@ libraryDependencies += "io.github.pmeheut" %%% "nscala-java-time" % "0.1.0"
 ### 0.1.0
 Creation from [nscala-time 2.3.0](https://github.com/nscala-time/nscala-time/tree/0eae4c573748317a600ff946c6f1823009b95a7f)
 
-### Version Numbering Policy
-
-`x.y.z`, each letter is digit, format is used as version number.  Meanings of `x` is not determined yet.  
-`y` means major-version.  Note that `y` is even number in any version of released `nscala-time`.  If `y` is odd, 
-it's development and/or SNAPSHOT version.  `z` is mainly used for bug fix releases.  Currently, the value of `z` is 0
-in most cases.
-
 ## Usage
 
 This is mostly a convenience wrapper around the Scala Java Time library, adding
